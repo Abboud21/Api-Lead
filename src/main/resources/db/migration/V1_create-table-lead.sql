@@ -3,7 +3,7 @@ CREATE TABLE tblead (
     PRIMARY KEY (id)
 )
 
-CREATE TABLE genero (
+CREATE TABLE tbgenero (
     id BIGINT NOT NULL auto_increment,
     nome VARCHAR(100) NOT NULL,
 )

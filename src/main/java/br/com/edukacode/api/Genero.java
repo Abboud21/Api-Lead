@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 
 
-@Entity(name = "genero")
+@Entity(name = "tbgenero")
 @Table(name = "Genero")
 @Getter
 @NoArgsConstructor

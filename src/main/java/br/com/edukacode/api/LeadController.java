@@ -1,5 +1,6 @@
 package br.com.edukacode.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/lead")
 public class LeadController {
 
+    @Autowired //injeção de dependência
+    private LeadRepository repository;
+
     @PostMapping
     public String criarLead(@RequestBody DadosCadastroLead dados) {
         // Lógica para criar um lead
+        System.out.println("Leade criado com os dados: " + dados);
+        repository.save(new Lead(null,dados.nome(), dados.email(), dados.telefone()));
         return "Lead criado com sucesso!";
     }
     @GetMapping

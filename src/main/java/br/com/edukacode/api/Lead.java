@@ -12,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 
 
 
-@Entity(name = "lead")
+@Entity(name = "tblead")
 @Table(name = "Lead")
 @Getter
 @NoArgsConstructor
@@ -25,5 +25,11 @@ public class Lead {
     private String nome;
     private String email;
     private String telefone;
+
+    public Lead(DadosCadastroLead dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+    }
     
 }
