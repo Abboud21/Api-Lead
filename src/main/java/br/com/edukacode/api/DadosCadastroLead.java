@@ -14,4 +14,8 @@ public record DadosCadastroLead(
 
     @NotBlank
     @Pattern(regexp = "\\d{10,11}")
-    String telefone) {}
+    String telefone,
+
+    @NotBlank
+    @Pattern(regexp = "\\d{12}")
+    String cpf) {}
