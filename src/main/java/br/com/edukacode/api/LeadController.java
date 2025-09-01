@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/lead")
 public class LeadController {
@@ -17,7 +20,8 @@ public class LeadController {
     private LeadRepository repository;
 
     @PostMapping
-    public String criarLead(@RequestBody DadosCadastroLead dados) {
+    @Transactional
+    public String criarLead(@RequestBody @Valid DadosCadastroLead dados) {
         // Lógica para criar um lead
         System.out.println("Leade criado com os dados: " + dados);
         repository.save(new Lead(null,dados.nome(), dados.email(), dados.telefone()));
