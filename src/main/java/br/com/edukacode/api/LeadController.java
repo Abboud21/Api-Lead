@@ -1,5 +1,7 @@
 package br.com.edukacode.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,16 +28,21 @@ public class LeadController {
         repository.save(new Lead(null,dados.nome(), dados.email(), dados.telefone(), dados.cpf()));
         return "Lead criado com sucesso!";
     }
+
     @GetMapping
-    public void listarLeads() {
-        // Lógica para listar leads
+    public List<DadosListagemLead> listarLeads() {
+        //implementação da listagem de leads
+        return repository.findAll().stream().map(DadosListagemLead::new).toList();
     }
+
     @PutMapping
     public void atualizarLead() {
         // Lógica para atualizar um lead
     }
+
     @DeleteMapping
     public void excluirLead() {
         // Lógica para excluir um lead
     }
+    
 }
