@@ -1,4 +1,4 @@
-package br.com.edukacode.api;
+package br.com.edukacode.api.Controller;
 
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.edukacode.api.Entities.Lead;
+
+import br.com.edukacode.api.Repository.LeadRepository;
+import br.com.edukacode.api.dto.DadosAtualizarLead;
+import br.com.edukacode.api.dto.DadosCadastroLead;
+import br.com.edukacode.api.dto.DadosListagemLead;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -38,8 +45,11 @@ public class LeadController {
     }
 
     @PutMapping
-    public void atualizarLead() {
+    @Transactional
+    public void atualizarLead(@RequestBody DadosAtualizarLead dados) {
         // Lógica para atualizar um lead
+        var lead = repository.getReferenceById(dados.id());
+        lead.atualizarInformacoes(dados);
     }
 
     @DeleteMapping
