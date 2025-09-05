@@ -37,7 +37,7 @@ public class Lead {
         this.cpf = dados.cpf();
     }
 
-    public void atualizarInformacoes(DadosAtualizarLead dados) {
+    public void atualizarInformacoesLead(DadosAtualizarLead dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }

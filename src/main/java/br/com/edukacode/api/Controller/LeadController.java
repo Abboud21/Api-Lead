@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,12 +50,14 @@ public class LeadController {
     public void atualizarLead(@RequestBody DadosAtualizarLead dados) {
         // Lógica para atualizar um lead
         var lead = repository.getReferenceById(dados.id());
-        lead.atualizarInformacoes(dados);
+        lead.atualizarInformacoesLead(dados);
     }
 
-    @DeleteMapping
-    public void excluirLead() {
-        // Lógica para excluir um lead
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirLead(@PathVariable Long id) {
+        // Implementação do metodo para excluir um lead
+        repository.deleteById(id);
     }
     
 }

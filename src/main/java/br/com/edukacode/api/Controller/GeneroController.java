@@ -4,13 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.edukacode.api.Entities.Genero;
 import br.com.edukacode.api.Repository.GeneroRepository;
+import br.com.edukacode.api.dto.DadosAtualizarGenero;
+import br.com.edukacode.api.dto.DadosAtualizarLead;
 import br.com.edukacode.api.dto.DadosCadastroGenero;
 import br.com.edukacode.api.dto.DadosListagemGenero;
 
@@ -38,6 +43,21 @@ public class GeneroController {
     @GetMapping
     public Page<DadosListagemGenero> listarGeneros(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemGenero::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizarGenero(@RequestBody DadosAtualizarGenero dados) {
+        // Lógica para atualizar um lead
+        var genero = repository.getReferenceById(dados.id());
+        genero.atualizarInformacoesGenero(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirGenero(@PathVariable Long id) {
+        // Implementação do metodo para excluir um lead
+        repository.deleteById(id);
     }
 
     
